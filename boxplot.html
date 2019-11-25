@@ -34,7 +34,7 @@
 
 			d3.select("form").append("label")
 				.attr("for", "add")
-				.text("Add");
+				.text(" Add Points ");
 
 			d3.select("form").append("input")
 				.attr("type", "radio")
@@ -43,7 +43,7 @@
 
 			d3.select("form").append("label")
 				.attr("for", "remove")
-				.text("Remove");
+				.text(" Remove Points");
 
 			TOTALWIDTH = 300;
 			TOTALHEIGHT = 400;
@@ -65,35 +65,31 @@
 			d3.select("svg").append("rect")
 				.attr("width", TOTALWIDTH).attr("height", TOTALHEIGHT)
 				.attr("x", 0).attr("y", 0)
-				.attr("fill", "yellow");
+				.attr("fill", "white");
 
 			d3.select("svg").append("rect")
 				.attr("width", graphwidth).attr("height", graphheight)
 				.attr("x", graphx).attr("y", graphy)
-				.attr("fill", "lightgreen");
+				.attr("fill", "LightCyan");
 
-			linex = TOTALWIDTH*LINEXMARGIN;
-			d3.select("svg").append("line")
-				.attr("x1", linex).attr("y1", graphy)
-				.attr("x2", linex).attr("y2", graphy + graphheight)
-				.attr("style", "stroke:rgb(0,0,0);stroke-width:2");
+			
+			//AXIS
+			ticks = [-100,-50,0,50,100];
+      		var scale = d3.scaleLinear()
+                .domain([d3.min(ticks), 	 d3.max(ticks)])
+                .range([graphheight, 0]);
 
-			scalenumbersx = TOTALWIDTH*LINENUMBERSXMARGIN;
-			ygap = graphheight/4;
-			for (i = 0; i < 5; i++) {
-				num = 100 - 50*i;
-				d3.select("svg").append("text")
-					.text(num)
-					.attr("x",scalenumbersx).attr("y",graphy + ygap*i);
-			}
+      		var y_axis = d3.axisLeft().scale(scale);
+     		d3.select("svg").append("g").attr("transform", "translate(40, 48)").call(y_axis);
+
 
 			innerrectx = TOTALWIDTH*INNERRECTXMARGIN;
 			innerrectwidth = TOTALWIDTH*(1-2*INNERRECTXMARGIN);
-			boxwidth =  TOTALWIDTH*(1-2*INNERRECTXMARGIN);
+			
 			d3.select("svg").append("rect")
 				.attr("x", innerrectx).attr("y", graphy)
 				.attr("width", innerrectwidth).attr("height", graphheight)
-				.attr("fill", "aquamarine")
+				.attr("fill", "PowderBlue")
 				.attr("id", "innerrect");
 
 			seconddiv = d3.select("#summary");
@@ -107,50 +103,50 @@
 		      seconddiv.append("p").text("Lower whisker:").attr("id", "LowerWhisker");
 
 
-			  d3.select("svg").append("line").attr("x1", 0)
-                        .attr("y1", 0)
-                    	.attr("x2", 0)
-                    	.attr("y2", 0).attr("style", "stroke:rgb(255,0,0);stroke-width:2").attr("id","BoxUp");
+		    d3.select("svg").append("line").attr("x1", 0)
+                    .attr("y1", 0)
+                	.attr("x2", 0)
+                	.attr("y2", 0).attr("stroke-width", 2).attr("stroke", "black").attr("id","BoxUp");
 
-				d3.select("svg").append("line").attr("x1", 0)
-                        .attr("y1", 0)
-                    	.attr("x2", 0)
-						.attr("y2", 0).attr("style", "stroke:rgb(255,0,0);stroke-width:2").attr("id","BoxDown");
-					
-				d3.select("svg").append("line").attr("x1", 0)
-                        .attr("y1", 0)
-                    	.attr("x2", 0)
-						.attr("y2", 0).attr("style", "stroke:rgb(255,0,0);stroke-width:2").attr("id","BoxLeft");
-
-				d3.select("svg").append("line").attr("x1", 0)
-                        .attr("y1", 0)
-                    	.attr("x2", 0)
-						.attr("y2", 0).attr("style", "stroke:rgb(255,0,0);stroke-width:2").attr("id","BoxRight");
-
-				d3.select("svg").append("line").attr("x1", 0)
-					.attr("y1", 0)
-					.attr("x2", 0)
-					.attr("y2", 0).attr("style", "stroke:rgb(255,0,0);stroke-width:2").attr("id","Median");
-
-				d3.select("svg").append("line").attr("x1", 0)
-					.attr("y1", 0)
-					.attr("x2", 0)
-					.attr("y2", 0).attr("style", "stroke:rgb(255,0,0);stroke-width:2").attr("id","UpperStem");
-
-				d3.select("svg").append("line").attr("x1", 0)
-					.attr("y1", 0)
-					.attr("x2", 0)
-					.attr("y2", 0).attr("style", "stroke:rgb(255,0,0);stroke-width:2").attr("id","LowerStem");
-
-				d3.select("svg").append("line").attr("x1", 0)
-					.attr("y1", 0)
-					.attr("x2", 0)
-					.attr("y2", 0).attr("style", "stroke:rgb(255,0,0);stroke-width:2").attr("id","UpperWhisker");
+			d3.select("svg").append("line").attr("x1", 0)
+                    .attr("y1", 0)
+                	.attr("x2", 0)
+					.attr("y2", 0).attr("stroke-width", 2).attr("stroke", "black").attr("id","BoxDown");
 				
-				d3.select("svg").append("line").attr("x1", 0)
-					.attr("y1", 0)
-					.attr("x2", 0)
-					.attr("y2", 0).attr("style", "stroke:rgb(255,0,0);stroke-width:2").attr("id","LowerWhisker");
+			d3.select("svg").append("line").attr("x1", 0)
+                    .attr("y1", 0)
+                	.attr("x2", 0)
+					.attr("y2", 0).attr("stroke-width", 2).attr("stroke", "black").attr("id","BoxLeft");
+
+			d3.select("svg").append("line").attr("x1", 0)
+                    .attr("y1", 0)
+                	.attr("x2", 0)
+					.attr("y2", 0).attr("stroke-width", 2).attr("stroke", "black").attr("id","BoxRight");
+
+			d3.select("svg").append("line").attr("x1", 0)
+				.attr("y1", 0)
+				.attr("x2", 0)
+				.attr("y2", 0).attr("stroke-width", 2).attr("stroke", "black").attr("id","Median");
+
+			d3.select("svg").append("line").attr("x1", 0)
+				.attr("y1", 0)
+				.attr("x2", 0)
+				.attr("y2", 0).attr("stroke-width", 2).attr("stroke", "black").attr("id","UpperStem");
+
+			d3.select("svg").append("line").attr("x1", 0)
+				.attr("y1", 0)
+				.attr("x2", 0)
+				.attr("y2", 0).attr("stroke-width", 2).attr("stroke", "black").attr("id","LowerStem");
+
+			d3.select("svg").append("line").attr("x1", 0)
+				.attr("y1", 0)
+				.attr("x2", 0)
+				.attr("y2", 0).attr("stroke-width", 2).attr("stroke", "black").attr("id","UpperWhisker");
+			
+			d3.select("svg").append("line").attr("x1", 0)
+				.attr("y1", 0)
+				.attr("x2", 0)
+				.attr("y2", 0).attr("stroke-width", 2).attr("stroke", "black").attr("id","LowerWhisker");
 
 		    function scalecoords(ycoord){
 				return 100-(ycoord-graphy)*200/(graphheight)
