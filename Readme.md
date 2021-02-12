@@ -1,6 +1,6 @@
 # Simple web app to play around with boxplots.
 
-[Link](https://kmsingh-git.github.io/interactiveboxplot/boxplot.html)
+[Link to Boxplot Webapp](https://kmsingh-git.github.io/interactiveboxplot/boxplot.html)
 
 ## Instructions
 1. Add points by clicking on the inner rectange.
